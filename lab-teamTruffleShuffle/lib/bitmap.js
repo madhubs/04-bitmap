@@ -16,14 +16,24 @@ function Bitmap(buffer) {
   this.pixelArray = buffer.slice(54, this.offset);
 }
 
+function newBmp(dataObj) {
+  let bmp = new Bitmap(dataObj);
+  return bmp;
+}
+
 bitmap.newBitmapInverted = (fileName, callback) => {
-  let bmp = new Bitmap(readWrite.readFilesAsync(fileName));
+  readWrite.readFilesAsync(fileName).then(newBmp(data))
+    .then(transform.invert(bmp.pixelArray))
+    .then(readWrite.writeFilesAsync(fileName + 'inverted', bmp.pixelArray))
+    .catch(function(err) {
+      console.error(err);
+    });
 }
 
 bitmap.newBitmapGrayScale = function() {
-  let bmp = new Bitmap(readWrite.readFilesAsync());
+  let bmp = new Bitmap(readWrite.readFilesAsync(fileName));
 }
 
 bitmap.newBitmapBlackOut = function() {
-  let bmp = new Bitmap(readWrite.readFilesAsync());
+  let bmp = new Bitmap(readWrite.readFilesAsync(fileName));
 }
