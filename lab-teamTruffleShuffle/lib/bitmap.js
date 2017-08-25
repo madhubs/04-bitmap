@@ -1,8 +1,8 @@
 'use strict';
 
-//const fs = require('fs');
-//const transform = require('./transform');
-//const readWrite = require('./read-write');
+// const fs = require('fs');
+// const transform = require('./transform');
+// const readWrite = require('./read-write');
 
 module.exports = function(buffer) {
   this.allData = buffer;

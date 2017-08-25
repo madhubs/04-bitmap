@@ -1,10 +1,10 @@
 'use strict';
 
 // const bitmap = require('../lib/bitmap');
-const transform = require('./transform');
+const transform = require('../lib/transform.js');
 const readWrite = require('./read-write');
 
-var fileName = `${__dirname}/../assets/bitmap.bmp`
+var fileName = `${__dirname}/../assets/bitmap.bmp`;
 
 newBitmapInverted(fileName);
 newBitmapGrayScale(fileName);
