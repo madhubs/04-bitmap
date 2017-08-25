@@ -2,6 +2,14 @@
 
 const transform = module.exports = {};
 
-transform.greyscale = () => {};
+transform.invert = (pixelArray) => {
+  //do something to pixel array to invert the colors
+};
 
-transform.invert = () => {};
+transform.grayscale = (pixelArray) => {
+  // do something to pixel array to grayscale the colors
+};
+
+transform.blackout = (pixelArray) => {
+  // do something to pixel array to blackout the colors
+};
