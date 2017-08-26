@@ -1,7 +1,7 @@
 'use strict';
 
 // const bitmap = require('../lib/bitmap');
-const transform = require('../lib/transform.js');
+const transform = require('./lib/transform');
 const readWrite = require('./read-write');
 
 var fileName = `${__dirname}/../assets/bitmap.bmp`;
