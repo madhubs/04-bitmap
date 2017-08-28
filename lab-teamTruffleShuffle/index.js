@@ -48,33 +48,26 @@ readWrite.writeFiles = (fileName, fileData) => {
 };
 //*****************************************************************
 
-//newBitmapInverted(fileName);
+newBitmapInverted(fileName);
 newBitmapGrayScale(fileName);
-//newBitmapBlackOut(fileName);
-//newBitmapRed(fileName);
-//newBitmapBlue(fileName);
-//newBitmapGreen(fileName);
+newBitmapBlackOut(fileName);
+newBitmapRed(fileName);
+newBitmapBlue(fileName);
+newBitmapGreen(fileName);
 
-// readWrite.readFiles((fileName), (err, data) => {
-//   console.log(data);
-// });
+
 
 function newBitmapInverted(fileName, callback) {
   readWrite.readFiles((fileName), (err, data) => {
-    //console.log(data);
     if (err) {
       return console.error(err);
     } else {
-      //console.log(data);
       transform.invert(data, (err, result) => {
-        //console.log(data);
         if (err) {
           return console.error(err);
         } else {
-          //console.log(fileName);
           var res = fileName.split('.bmp');
           var newfileName = res[0] + '_inverted.bmp';
-          //console.log('hello',data);
           readWrite.writeFiles(newfileName, data.allData);
         }
       });
@@ -84,20 +77,15 @@ function newBitmapInverted(fileName, callback) {
 
 function newBitmapGrayScale(fileName, callback) {
   readWrite.readFiles((fileName), (err, data) => {
-    //console.log(data);
     if (err) {
       return console.error(err);
     } else {
-      //console.log(data);
       transform.grayscale(data, (err, result) => {
-        //console.log(data);
         if (err) {
           return console.error(err);
         } else {
-          //console.log(fileName);
           var res = fileName.split('.bmp');
           var newfileName = res[0] + '_grayscaled.bmp';
-          //console.log('hello',data);
           readWrite.writeFiles(newfileName, data.allData);
         }
       });
@@ -107,20 +95,15 @@ function newBitmapGrayScale(fileName, callback) {
 
 function newBitmapBlackOut(fileName, callback) {
   readWrite.readFiles((fileName), (err, data) => {
-    //console.log(data);
     if (err) {
       return console.error(err);
     } else {
-      //console.log(data);
       transform.blackout(data, (err, result) => {
-        //console.log(data);
         if (err) {
           return console.error(err);
         } else {
-          //console.log(fileName);
           var res = fileName.split('.bmp');
           var newfileName = res[0] + '_blackout.bmp';
-          //console.log('hello',data);
           readWrite.writeFiles(newfileName, data.allData);
         }
       });
@@ -128,6 +111,59 @@ function newBitmapBlackOut(fileName, callback) {
   });
 }
 
+function newBitmapRed(fileName, callback) {
+  readWrite.readFiles((fileName), (err, data) => {
+    if (err) {
+      return console.error(err);
+    } else {
+      transform.red(data, (err, result) => {
+        if (err) {
+          return console.error(err);
+        } else {
+          var res = fileName.split('.bmp');
+          var newfileName = res[0] + '_red.bmp';
+          readWrite.writeFiles(newfileName, data.allData);
+        }
+      });
+    }
+  });
+}
+
+function newBitmapGreen(fileName, callback) {
+  readWrite.readFiles((fileName), (err, data) => {
+    if (err) {
+      return console.error(err);
+    } else {
+      transform.green(data, (err, result) => {
+        if (err) {
+          return console.error(err);
+        } else {
+          var res = fileName.split('.bmp');
+          var newfileName = res[0] + '_green.bmp';
+          readWrite.writeFiles(newfileName, data.allData);
+        }
+      });
+    }
+  });
+}
+
+function newBitmapBlue(fileName, callback) {
+  readWrite.readFiles((fileName), (err, data) => {
+    if (err) {
+      return console.error(err);
+    } else {
+      transform.blue(data, (err, result) => {
+        if (err) {
+          return console.error(err);
+        } else {
+          var res = fileName.split('.bmp');
+          var newfileName = res[0] + '_blue.bmp';
+          readWrite.writeFiles(newfileName, data.allData);
+        }
+      });
+    }
+  });
+}
 
 // FROM TRANSFORM.JS FILE************************************
 transform.invert = (data, callback) => {
@@ -143,9 +179,37 @@ transform.invert = (data, callback) => {
 transform.grayscale = (data, callback) => {
   // do something to pixel array to grayscale colors
   for (var i = 0; i < data.pixelArray.length; i+=4) {
-    data.pixelArray[i] = 255 - data.pixelArray[i];
-    data.pixelArray[i + 1] = 255 - data.pixelArray[i + 1];
-    data.pixelArray[i + 2] = 255 - data.pixelArray[i + 2];
+    var grayscale = (data.pixelArray[i] + data.pixelArray[i + 1] + data.pixelArray[i + 2]) / 3;
+    data.pixelArray[i] = grayscale;
+    data.pixelArray[i + 1] = grayscale;
+    data.pixelArray[i + 2] = grayscale;
+  }
+  return callback(null, data);
+};
+
+transform.red = (data, callback) => {
+  // do something to pixel array to red shift colors
+  for (var i = 0; i < data.pixelArray.length; i+=4) {
+    var redshift = clamp(1.2 * (data.pixelArray[i] + data.pixelArray[i + 1] + data.pixelArray[i + 2]));
+    data.pixelArray[i + 2] = redshift;
+  }
+  return callback(null, data);
+};
+
+transform.green = (data, callback) => {
+  // do something to pixel array to green shift colors
+  for (var i = 0; i < data.pixelArray.length; i+=4) {
+    var greenshift = clamp(1.2 * (data.pixelArray[i] + data.pixelArray[i + 1] + data.pixelArray[i + 2]));
+    data.pixelArray[i + 1] = greenshift;
+  }
+  return callback(null, data);
+};
+
+transform.blue = (data, callback) => {
+  // do something to pixel array to blue shift colors
+  for (var i = 0; i < data.pixelArray.length; i+=4) {
+    var blueshift = clamp(1.2 * (data.pixelArray[i] + data.pixelArray[i + 1] + data.pixelArray[i + 2]));
+    data.pixelArray[i] = blueshift;
   }
   return callback(null, data);
 };
@@ -160,3 +224,7 @@ transform.blackout = (data, callback) => {
 
 
 //**********************************************************
+
+function clamp(num) {
+  return num <= 0 ? 0 : num >= 255 ? 255 : num;
+}
