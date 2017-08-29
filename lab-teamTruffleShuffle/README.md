@@ -3,7 +3,7 @@
 =====================================
 
 # Project Description
-We have created an app using Node.js and Javascript that can transform a 32-bit bitmap image to blackout, greyscale or invert the color scheme.
+We have created an app using Node.js and Javascript that can transform a 32-bit bitmap image to blackout, greyscale or invert the color scheme. We have also added three additional filters for blue, green and red.
 
 # Installation
 
