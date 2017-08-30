@@ -2,6 +2,26 @@
 # Team Truffle Shuffle
 =====================================
 
-# Description
+# Project Description
+We have created an app using Node.js and Javascript that can transform a 32-bit bitmap image to blackout, greyscale or invert the color scheme. We have also added three additional filters for blue, green and red.
 
-In the lab today we had to use the 'done' argument and callback function in jest to get it to work properly.  When jest is testing asynchronous JavaScript code, it needs to know to wait for a test to complete before moving on to another test.  You pass the test the argument 'done' and then call the done() function at the bottom of the test to let jest know that it  can move on.  If the done() function doesn't get called, the test will fail as well.  
+# Installation
+
+To run this app you must have Node.js installed. The documentation and installation docs can be found below.
+
+Node.js Installation
+https://nodejs.org/en/download/
+Node.js Docs
+https://nodejs.org/dist/latest-v6.x/docs/api/
+
+# Using the App
+
+To begin using the app you must first:
+
+  1. You must save a 32-bitmap image in the assets folder.
+  2. You must rename that image to bitmap.bmp.
+  3. Open your terminal. Then locate and enter your project file.
+  4. Run the following command in terminal:
+    node index.js.
+
+At this point you should find the additional .bmp files in your assets folder for copying and transfer for whatever project you need it for.
